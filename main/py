@@ -1,0 +1,75 @@
+
+import play
+from random import randint
+bird = play.new_box(color='black',
+x=0,
+y=0,
+width=100,
+height=100,
+transparency=100)
+
+bird.start_physics(can_move=True,bounciness=0.2,y_speed=15 )
+
+
+# WIN = play.new_text(
+# words=,
+# x=0,
+# y=0,
+# font_size=50,
+# color=e)
+
+y_cor = -200
+delta = 460
+
+def draw_truba(y, delta):
+    x = 500
+
+    truba1 = play.new_box(color='black',
+    x=x,y=y,
+    width=50,
+    height=400,
+    transparency=50)
+
+    truba2 = play.new_box(color='black',
+    x=x,y=y + 400 + delta,
+    width=50,
+    height=400,
+    transparency=50)
+
+    return truba1, truba2
+
+truba_list=[]
+
+@play.repeat_forever
+async def do():
+    s = draw_truba(-250,0)
+    truba_list.append(s)
+    await play.timer(1)
+
+@play.repeat_forever
+async def do():
+    if play.key_is_pressed('1'):
+        bird.physics.y_speed=40
+    # elif:
+        # bird.physics.y_speed=-20
+        # await play.timer(0.1)
+
+@play.repeat_forever
+async def run():
+    for truba in truba_list:
+        truba[0].x-=5
+        truba[1].x -= 5
+        if truba[0].x < -500:
+            truba[0].remove()
+            truba[1].remove()
+            truba_list.remove(truba)
+    await play.timer(1/60)
+
+@play.repeat_forever
+def los():
+    for Truba in truba_list
+        if bird.is_touching(truba[0]) or bird.is_touching(truba[1]):
+
+
+
+play.start_program()
